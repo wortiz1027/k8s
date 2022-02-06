@@ -25,3 +25,6 @@ data:
   KEY_APP_FILESYSTEM: /employee/dev/data
   KEY_DB_EMPLOYEES_CONNECTION: mysql
   KEY_DB_EMPLOYEES_NAME: employees
+  KEY_KEYCLOAK_URL_BASE_CONNECTION: keycloak
+  KEY_KEYCLOAK_REALM: realm-services
+  KEY_KEYCLOAK_RESOURCE: employee-service

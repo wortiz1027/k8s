@@ -32,7 +32,7 @@ spec:
     rollingUpdate:
       maxUnavailable: 1
       maxSurge: 1
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -47,7 +47,7 @@ spec:
             claimName: pvc-development
       containers:
         - name: employee-services
-          image: wortiz1027/employee-services:v1.0.5-20220117180152
+          image: wortiz1027/employee-services:v1.0.6-20220206110619
           imagePullPolicy: Always
           ports:
             - name: http
@@ -74,17 +74,37 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: cm-application-development
-                  key: KEY_DB_EMPLOYEES_NAME
+                  key: KEY_DB_EMPLOYEES_NAME            
+            - name: KEYCLOAK_URL_BASE_CONNECTION
+              valueFrom:
+                configMapKeyRef:
+                  name: cm-application-development
+                  key: KEY_KEYCLOAK_URL_BASE_CONNECTION
+            - name: KEYCLOAK_REALM
+              valueFrom:
+                configMapKeyRef:
+                  name: cm-application-development
+                  key: KEY_KEYCLOAK_REALM
+            - name: KEYCLOAK_RESOURCE
+              valueFrom:
+                configMapKeyRef:
+                  name: cm-application-development
+                  key: KEY_KEYCLOAK_RESOURCE
             - name: DB_EMPLOYEES_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: sc-db-credential-development
+                  name: sc-application-credential-development
                   key: KEY_DB_EMPLOYEES_USERNAME
             - name: DB_EMPLOYEES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: sc-db-credential-development
+                  name: sc-application-credential-development
                   key: KEY_DB_EMPLOYEES_PASSWORD
+            - name: KEYCLOAK_RESOURCE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: sc-application-credential-development
+                  key: KEY_KEYCLOAK_RESOURCE_SECRET                  
           volumeMounts:
             - name: vlm-dev-nfs-storage
               mountPath: "/employee/dev/data"

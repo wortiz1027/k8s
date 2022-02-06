@@ -1,0 +1,43 @@
+# +----------------------------------------------------------------------------
+# | CREATE SERVICE CONNECT TO EXTERNAL KEYCLOAK FOR DEVELOPMENT ENVIRONMENT
+# | AUTHOR: WORTIZ
+# | DATE: 06-02-2022
+# +----------------------------------------------------------------------------
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak
+  namespace: ns-development
+  labels:
+    app.kubernetes.io/name: employees
+    app.kubernetes.io/instance: employees
+    app.kubernetes.io/version: "1.0.5"
+    app.kubernetes.io/component: microservice
+    app.kubernetes.io/part-of: api-employee
+    app.kubernetes.io/managed-by: github.com
+    app: api-employees
+    owner: taa
+    env: dev
+    type: configuration
+spec:
+ ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: keycloak
+  namespace: ns-development
+  labels:
+    app: api-employees
+    owner: taa
+    env: dev
+    type: configuration  
+subsets:
+  - addresses:
+    - ip: 192.168.20.26
+    ports:
+    - port: 28080
