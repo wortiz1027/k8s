@@ -22,9 +22,11 @@ metadata:
     type: configuration
 spec:
  ports:
-    - protocol: TCP
+    - name: "keycloak"
+      protocol: "TCP"
       port: 80
       targetPort: 80
+      nodePort: 0
 ---
 apiVersion: v1
 kind: Endpoints
@@ -38,6 +40,7 @@ metadata:
     type: configuration  
 subsets:
   - addresses:
-    - ip: 192.168.20.26
+    - ip: 192.168.59.107
     ports:
-    - port: 28080
+    - port: 80
+      name: "keycloak"

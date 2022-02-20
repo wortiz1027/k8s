@@ -40,6 +40,13 @@ spec:
                 port:
                   number: 8080
           - pathType: Prefix
+            path: /files/api/v1/upload
+            backend:
+              service:
+                name: svc-employee-services-development
+                port:
+                  number: 8080
+          - pathType: Prefix
             path: /monitor/actuator/health
             backend:
                 service:
