@@ -47,7 +47,7 @@ spec:
             claimName: pvc-development
       containers:
         - name: employee-services
-          image: wortiz1027/employee-services:v1.0.11-20220220102133
+          image: $IMAGE_NAME
           imagePullPolicy: Always
           ports:
             - name: http
@@ -110,11 +110,11 @@ spec:
               mountPath: "/employee/dev/data"
           resources:
             requests:
-              memory: "250Mi"
-              cpu: "350m"
+              memory: "200Mi"
+              cpu: "300m"
             limits:
-              memory: "350Mi"
-              cpu: "450m"
+              memory: "300Mi"
+              cpu: "400m"
           startupProbe:
             httpGet:
               path: /ping
