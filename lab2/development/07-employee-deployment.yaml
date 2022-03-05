@@ -47,7 +47,7 @@ spec:
             claimName: pvc-development
       containers:
         - name: employee-services
-          image: ${IMAGE_NAME}
+          image: {{IMAGE_NAME}}
           imagePullPolicy: Always
           ports:
             - name: http
